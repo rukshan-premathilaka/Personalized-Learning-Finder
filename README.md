@@ -1,6 +1,48 @@
 # **Personalized Learning Finder**
 A C-based command-line application that recommends courses tailored to users' skills and passions, utilizing MySQL for database management. This tool assists users in choosing the best learning path to achieve their goals.
 
+## Why we built it
+There are many courses and every course has different rules. Age, education level and gender can be different. It is hard to check all of them by hand. So we built a simple tool that does the checking for the user.
+
+## What the app can do
+- Browse all courses, page by page
+- Search courses by name
+- Show full details of one course
+- Recommend a course using the user's details
+- Check the user input, and save errors to a log file
+
+## Technologies
+| Technology | Why we used it |
+|---|---|
+| C | Main programming language |
+| SQLite | Small database stored in one file (`plf.db`) |
+| SQL | Create tables, add data, and search courses |
+| CMake | Build the project |
+| CLion, Git and GitHub | Development and teamwork <!-- TODO: confirm --> |
+
+
+## How the code is organised
+
+We split the code into small parts. Each part has one job.
+
+```mermaid
+flowchart TD
+    main["main.c"] --> menu["Main menu"]
+    menu --> input["Input and validation"]
+    menu --> courses["Course search and recommendation"]
+    courses --> db["Database connection"]
+    db --> file[("plf.db")]
+    courses --> output["Output formatting"]
+    menu --> log["Error log"]
+    db --> log
+```
+
+## Database
+
+The database has 10 tables. The main table is `Courses`. Five small tables keep the extra data, like institution, category, currency, gender and education level. Two more tables connect courses with skills and passions, because one course can have many skills.
+full diagram here:
+![Image Description](database/plf.png)
+
 ---
 
 ## **How to Run the Application**
